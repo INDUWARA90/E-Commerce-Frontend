@@ -133,6 +133,44 @@ const resolveCreatedProductId = (payload) =>
 const usesDefaultImage = (value) =>
   String(value || "").toLowerCase().includes("/images/default.png");
 
+const enrichProductsWithCategoryLinks = async (products) => {
+  let categories = [];
+  try {
+    categories = await adminProductApi.getCategories();
+  } catch {
+    categories = [];
+  }
+
+  const categoryLinks = new Map();
+  await Promise.all(
+    categories.map(async (category) => {
+      try {
+        const items = await fetchCategoryProducts(category.id);
+        items.forEach((product) => {
+          const productId = normalizeId(product?.productId ?? product?.id ?? "");
+          if (!productId) return;
+          categoryLinks.set(productId, {
+            categoryId: normalizeId(category.id),
+            categoryName: category.name || "",
+          });
+        });
+      } catch {
+        // Ignore per-category lookup failures and keep base product data.
+      }
+    })
+  );
+
+  return products.map((item) => {
+    const linked = categoryLinks.get(normalizeId(item?.id));
+    if (!linked) return item;
+    return {
+      ...item,
+      categoryId: item?.categoryId || linked.categoryId,
+      categoryName: item?.categoryName || linked.categoryName,
+    };
+  });
+};
+
 // ─── Error extraction ────────────────────────────────────────────────────────
 
 export const extractApiErrorMessage = (error, fallback) =>
@@ -152,7 +190,7 @@ export const adminProductApi = {
     const firstItems = unwrapList(firstData).map(toProduct);
 
     if (Array.isArray(firstData)) {
-      return firstItems;
+      return enrichProductsWithCategoryLinks(firstItems);
     }
 
     const totalPages = Number(firstData?.totalPages ?? 0);
@@ -160,7 +198,7 @@ export const adminProductApi = {
     const shouldPaginate = totalPages > 1 || serverLastPage === false;
 
     if (!shouldPaginate) {
-      return firstItems;
+      return enrichProductsWithCategoryLinks(firstItems);
     }
 
     let pageNumber = 1;
@@ -183,43 +221,7 @@ export const adminProductApi = {
       pageNumber += 1;
     }
 
-    // `/public/products` may not include category info.
-    // Enrich categoryId/categoryName via category-product endpoints.
-    let categories = [];
-    try {
-      categories = await adminProductApi.getCategories();
-    } catch {
-      categories = [];
-    }
-
-    const categoryLinks = new Map();
-    await Promise.all(
-      categories.map(async (category) => {
-        try {
-          const items = await fetchCategoryProducts(category.id);
-          items.forEach((product) => {
-            const productId = normalizeId(product?.productId ?? product?.id ?? "");
-            if (!productId) return;
-            categoryLinks.set(productId, {
-              categoryId: normalizeId(category.id),
-              categoryName: category.name || "",
-            });
-          });
-        } catch {
-          // Ignore per-category lookup failures and keep base product data.
-        }
-      })
-    );
-
-    return all.map((item) => {
-      const linked = categoryLinks.get(normalizeId(item?.id));
-      if (!linked) return item;
-      return {
-        ...item,
-        categoryId: item?.categoryId || linked.categoryId,
-        categoryName: item?.categoryName || linked.categoryName,
-      };
-    });
+    return enrichProductsWithCategoryLinks(all);
   },
 
   async getCategories() {

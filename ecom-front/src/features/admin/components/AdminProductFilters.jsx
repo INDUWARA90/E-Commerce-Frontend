@@ -23,6 +23,19 @@ function AdminProductFilters({
           className="h-11 px-4 rounded-xl border border-slate-200"
         />
         <select
+          value={categoryFilter}
+          onChange={(event) => setCategoryFilter(event.target.value)}
+          className="h-11 px-4 rounded-xl border border-slate-200 bg-white"
+        >
+          <option value="all">All categories</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+
+        <select
           value={stockFilter}
           onChange={(event) => setStockFilter(event.target.value)}
           className="h-11 px-4 rounded-xl border border-slate-200 bg-white"
