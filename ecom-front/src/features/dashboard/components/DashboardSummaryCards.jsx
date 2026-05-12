@@ -14,7 +14,7 @@ function DashboardSummaryCards({ summary }) {
         {
             label: "Total Revenue",
             value: formatPrice(summary.totalRevenue),
-            icon: "Rs.", // Custom String Icon
+            icon: "$", // Custom String Icon
             color: "text-orange-500",
             bg: "bg-slate-900",
             isPrimary: true,

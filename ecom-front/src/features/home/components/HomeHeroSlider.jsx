@@ -5,9 +5,9 @@ import { ArrowRight } from "lucide-react";
 import { bannerList } from "../../../shared/constants/bannerList";
 
 const HERO_COLORS = [
-  "from-teal-600 via-teal-500 to-emerald-400",
-  "from-orange-600 via-orange-500 to-amber-400",
-  "from-slate-900 via-slate-800 to-slate-700",
+  "from-slate-950 via-blue-900 to-cyan-600",
+  "from-zinc-950 via-slate-800 to-indigo-600",
+  "from-slate-900 via-teal-800 to-emerald-500",
 ];
 
 function HomeHeroSlider() {

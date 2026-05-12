@@ -346,6 +346,15 @@ function AdminProductsPage() {
           onEdit={onEdit}
           onDelete={onDelete}
         />
+
+        <AdminProductsPaginationControls
+          pageSize={pageSize}
+          setPageSize={setPageSize}
+          page={page}
+          totalPages={totalPages}
+          onPrev={() => setPage((current) => Math.max(current - 1, 1))}
+          onNext={() => setPage((current) => Math.min(current + 1, totalPages))}
+        />
       </div>
     </section>
   );

@@ -8,6 +8,9 @@ import HomeCategoriesSection from "../components/HomeCategoriesSection";
 import HomeHeroSlider from "../components/HomeHeroSlider";
 import HomeLatestProductsSection from "../components/HomeLatestProductsSection";
 import useHomeData from "../hooks/useHomeData";
+import HomeFlashSale from "@/features/home/components/HomeFlashSale.jsx";
+import HomeBrandPartners from "@/features/home/components/HomeBrandPartners.jsx";
+import HomeTestimonials from "@/features/home/components/HomeTestimonials.jsx";
 
 function HomePage() {
   const { products, categories, isLoading, isCategoryLoading, errorMessage, categoryError } =
@@ -38,6 +41,9 @@ function HomePage() {
         products={products || []}
       />
       <HomeBenefitsSection />
+      <HomeTestimonials />
+      <HomeBrandPartners />
+      <HomeFlashSale />
     </div>
   );
 }

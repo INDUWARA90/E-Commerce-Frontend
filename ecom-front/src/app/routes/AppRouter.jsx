@@ -18,6 +18,9 @@ const AdminMessagesPage = lazy(() =>
 );
 const AboutPage = lazy(() => import("../../features/info/pages/AboutPage"));
 const ContactPage = lazy(() => import("../../features/info/pages/ContactPage"));
+const PrivacyPage = lazy(() => import("../../features/info/pages/Privacy"));
+const TermsPage = lazy(() => import("../../features/info/pages/Terms"));
+const CookiesPage = lazy(() => import("../../features/info/pages/Cookies"));
 const CartPage = lazy(() => import("../../features/cart/pages/CartPage"));
 const CheckoutPage = lazy(() => import("../../features/checkout/pages/CheckoutPage"));
 const DashboardPage = lazy(() => import("../../features/dashboard/pages/DashboardPage"));
@@ -38,6 +41,9 @@ function AppRouter() {
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/cookies" element={<CookiesPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route element={<PrivateRoute />}>
             <Route path="/checkout" element={<CheckoutPage />} />

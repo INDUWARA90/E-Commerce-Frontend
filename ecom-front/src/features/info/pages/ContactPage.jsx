@@ -111,8 +111,8 @@ const Contact = () => {
           {/* Info Card Component */}
           {[
             { icon: <FaPhone />, label: "Call us", val: "+94 763384586", color: "text-teal-600", bg: "bg-teal-50" },
-            { icon: <FaRegEnvelope />, label: "Email us", val: "harshana@gmail.com", color: "text-orange-600", bg: "bg-orange-50" },
-            { icon: <FaMapMarkedAlt />, label: "Visit us", val: "Galgamuwa, Sri Lanka", color: "text-teal-600", bg: "bg-teal-50" }
+            { icon: <FaRegEnvelope />, label: "Email us", val: "ecom@gmail.com", color: "text-orange-600", bg: "bg-orange-50" },
+            { icon: <FaMapMarkedAlt />, label: "Visit us", val: "Colombo, Sri Lanka", color: "text-teal-600", bg: "bg-teal-50" }
           ].map((item, idx) => (
             <div key={idx} className="bg-white p-7 rounded-[2.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.02)] border border-slate-100 flex items-center gap-6 hover:-translate-y-2 transition-all duration-300 group cursor-pointer">
               <div className={`w-16 h-16 ${item.bg} rounded-3xl flex items-center justify-center ${item.color} group-hover:scale-110 transition-transform`}>
