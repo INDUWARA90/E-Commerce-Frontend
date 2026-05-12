@@ -82,11 +82,7 @@ function Login() {
                             placeholder="********"
                             errors={errors} 
                         />
-                        <div className="flex justify-end mt-2">
-                            <button type="button" className="text-[10px] md:text-xs font-bold text-orange-600 hover:text-orange-700 transition-colors uppercase tracking-wider">
-                                Forgot password?
-                            </button>
-                        </div>
+                    
                     </div>
                 </div>
 

@@ -39,7 +39,7 @@ function AdminProductTable({ loading, products, onEdit, onDelete }) {
                   />
                 </td>
                 <td className="px-4 py-3 font-semibold text-slate-700">{product.productName}</td>
-                <td className="px-4 py-3 text-slate-600">Rs.{Number(product.price || 0).toFixed(2)}</td>
+                <td className="px-4 py-3 text-slate-600">${Number(product.price || 0).toFixed(2)}</td>
                 <td className="px-4 py-3 text-slate-600">{Number(product.quantity || 0)}</td>
                 <td className="px-4 py-3">
                   <div className="flex gap-2">
